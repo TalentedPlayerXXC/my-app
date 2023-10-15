@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useImperativeHandle, forwardRef } from 'react';
 import {
   AppstoreOutlined,
   MailOutlined,
 } from '@ant-design/icons';
-import {  Menu } from 'antd';
+import { Button, Menu } from 'antd';
 function getItem(label, key, icon, children, type) {
   return {
     key,
@@ -13,34 +13,35 @@ function getItem(label, key, icon, children, type) {
     type,
   };
 }
+
 const items = [
   getItem('质量策略', 'celue', <MailOutlined />, [
     getItem('批量配置', 'peizhi'),
-    getItem('单应用配置', 'yingyong',null,
-    [
+    getItem('单应用配置', 'yingyong', null,
+      [
         getItem('流水线', 'kshuixian', null, [
-            getItem('linke', 'llinke'),
-            getItem('linke+', 'llinkplus'),
-            getItem('coludeIde', 'lcoludeIde'),
+          getItem('linke', 'llinke'),
+          getItem('linke+', 'llinkplus'),
+          getItem('coludeIde', 'lcoludeIde'),
         ]
-        ), 
-        getItem('卡点', 'kadian', null,[
-            getItem('linke', 'klinke'),
-            getItem('linke+', 'klinkplus'),
-            getItem('coludeIde', 'kcoludeIde'),
-            getItem('雨燕', 'yuyan'),
+        ),
+        getItem('卡点', 'kadian', null, [
+          getItem('linke', 'klinke'),
+          getItem('linke+', 'klinkplus'),
+          getItem('coludeIde', 'kcoludeIde'),
+          getItem('雨燕', 'yuyan'),
         ])
-    ]
+      ]
     ),
   ]),
   getItem('风险评估', 'risk', <AppstoreOutlined />, [
-    getItem('迭代报告', 'itealreport',null,[getItem('服务端', 'server'), getItem('前端', 'front')]),
-    getItem('发布报告', 'fabu',null,[getItem('服务端', 'fserver')]),
+    getItem('迭代报告', 'itealreport', null, [getItem('服务端', 'server'), getItem('前端', 'front')]),
+    getItem('发布报告', 'fabu', null, [getItem('服务端', 'fserver')]),
     getItem('报告配置', 'baogaopeizhi', null, [getItem('模版配置', 'moban'), getItem('模块配置', 'mokuai')]),
   ]),
   getItem('问题录入', 'problem', <AppstoreOutlined />, [
-    getItem('服务端/前端', 'zonghe',null,[getItem('数据大盘', 'zonghedapan')]),
-    getItem('客户端', 'client',null,[getItem('问题录入', 'wentiluru'),getItem('数据大盘', 'shujudapan')]),
+    getItem('服务端/前端', 'zonghe', null, [getItem('数据大盘', 'zonghedapan')]),
+    getItem('客户端', 'client', null, [getItem('问题录入', 'wentiluru'), getItem('数据大盘', 'shujudapan')]),
     getItem('配置管理', 'peizhiguanli', null, [
       getItem('业务线配置', 'business'),
       getItem('问题标签配置', 'tag'),
@@ -52,8 +53,20 @@ const items = [
     ]),
   ]),
 ];
-const MenuList = () => {
-  const [collapsed, ] = useState(false);
+const MenuList = forwardRef((props, ref) => {
+  // console.log(props);
+  const { setCount } = props
+  const [collapsed,] = useState(false);
+  const [num, setNum] = useState(0)
+  const getMenuStatus = (a) => {
+    console.log(a);
+  }
+  useImperativeHandle(ref, () => {
+    return {
+      getMenuStatus,
+      setNum
+    }
+  })
   return (
     <div
       style={{
@@ -62,8 +75,11 @@ const MenuList = () => {
         overflowY: 'auto'
       }}
     >
+      <Button onClick={() => setCount((s) => s + 1)}>调用父组件count + 1</Button>
+      子组件num：{num}
       <Menu
         // defaultSelectedKeys={['1']}
+        // onClick={getMenuStatus}
         defaultOpenKeys={['risk']}
         mode="inline"
         // theme="dark"
@@ -72,5 +88,5 @@ const MenuList = () => {
       />
     </div>
   );
-};
+})
 export default MenuList;
