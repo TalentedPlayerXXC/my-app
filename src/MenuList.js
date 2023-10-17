@@ -1,9 +1,10 @@
-import React, { useState, useImperativeHandle, forwardRef } from 'react';
+import React, { useState, useImperativeHandle, forwardRef, useContext } from 'react';
 import {
   AppstoreOutlined,
   MailOutlined,
 } from '@ant-design/icons';
 import { Button, Menu } from 'antd';
+import myContext from './redux/reducer';
 function getItem(label, key, icon, children, type) {
   return {
     key,
@@ -55,6 +56,7 @@ const items = [
 ];
 const MenuList = forwardRef((props, ref) => {
   // console.log(props);
+  const val = useContext(myContext)
   const { setCount } = props
   const [collapsed,] = useState(false);
   const [num, setNum] = useState(0)
@@ -75,6 +77,7 @@ const MenuList = forwardRef((props, ref) => {
         overflowY: 'auto'
       }}
     >
+      {console.log(val, '跨组件通讯')}
       <Button onClick={() => setCount((s) => s + 1)}>调用父组件count + 1</Button>
       子组件num：{num}
       <Menu
