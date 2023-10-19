@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS复习</title>
+    <style>
+        .chuizhi1 {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            border: 1px solid #ccc;
+        }
+
+        .chuizhi1>div {
+            width: 100px;
+            height: 100px;
+            background-color: #000;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+        }
+
+        .chuizhi2 {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            border: 1px solid #ccc;
+        }
+
+        .chuizhi2>div {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            width: 100px;
+            height: 100px;
+            background-color: #ccc;
+        }
+
+        .chuizhi3 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 200px;
+            height: 200px;
+            border: 1px solid #ccc;
+        }
+
+        .chuizhi3>div {
+            width: 100px;
+            height: 100px;
+            background-color: #ccc;
+        }
+
+        .textoverflow {
+            width: 200px;
+            height: 200px;
+            border: 1px solid #ccc;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: no-warp;
+        }
+
+        .sanjiao {
+            margin-top: 20px;
+            width: 200px;
+            height: 200px;
+            border: 1px solid #ccc;
+        }
+
+        .sanjiao>div {
+            position: relative;
+            /* width: 100px;
+            height: 100px; */
+            border-style: solid;
+            border-width: 50px;
+            border-color: transparent transparent transparent #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 水平垂直居中 -->
+    <!-- 1.position transform: translate -->
+    <div class="chuizhi1">
+        <div>1</div>
+    </div>
+    <!-- 2.posoiton margin:auto -->
+    <div class="chuizhi2">
+        <div>1</div>
+    </div>
+    <!-- 3. flex布局 -->
+    <div class="chuizhi3">
+        <div>1</div>
+    </div>
+    <!-- 文本溢出 -->
+    <div class="textoverflow"
+        title="textoverflowtextoverflowtextoverflowtextoverflowtextoverflowtextoverflowtextoverflow">
+        textoverflowtextoverflowtextoverflowtextoverflowtextoverflowtextoverflowtextoverflow
+    </div>
+    <!-- 画三角 -->
+    <div class="sanjiao">
+        <div></div>
+    </div>
+</body>
+
+</html>
