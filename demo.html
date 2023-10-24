@@ -905,7 +905,54 @@
       }
       return targetObj
     }
-    console.log(cloneDeep2(data), data);
+    // console.log(cloneDeep2(data), data);
+    // 实现一个trim功能
+    function trim(str) {
+      return str.replace(/^\s+|\s+$/g, '')
+    }
+    // console.log(trim('     xxxswlance.cn        '))
+    // 数组对象去重
+    const arr1 = [
+      { id: 1, city: '南京' },
+      { id: 2, city: '南京' },
+      { id: 3, city: '杭州' },
+      { id: 4, city: '广州' }
+    ];
+    function formatArr(arr) {
+      // reduce去重
+      // let obj = {}
+      // return arr.reduce((nArr, item) => {
+      //   obj[item?.city] ? '' : obj[item?.city] = true && nArr.push(item);
+      //   return nArr
+      // }, [])
+      // Map去重
+      let _map = new Map();
+      for (v of arr) {
+        if (!_map.has(v?.city)) {
+          _map.set(v?.city, v)
+        }
+      }
+      return [..._map.values()]
+    }
+    // console.log(formatArr(arr1));
+    // 实现深拷贝
+    function deepClone3(obj) {
+      const targetObj = obj?.constructor === Array ? [] : {}
+      for (k in obj) {
+        if (Object.hasOwnProperty.call(obj, k)) {
+          const ele = obj[k]
+          if (typeof ele === "object" && ele !== null) {
+            targetObj[k] = deepClone3(ele)
+          } else {
+            targetObj[k] = ele
+          }
+        }
+      }
+      return targetObj
+    }
+    console.log(deepClone3(data), data);
+    // 实现一个简易的promise
+    // 实现一个简易的async await
   </script>
 </body>
 

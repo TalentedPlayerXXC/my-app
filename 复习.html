@@ -23,7 +23,7 @@
       }
       console.log(obj);
     }
-    //   strNum("123aaxx");
+    strNum("123aaxx");
     // 数组乱序
     function arrRandom(arr) {
       if (!Array.isArray(arr)) return -1;
@@ -320,7 +320,51 @@
       return targetObj
 
     }
-    console.log(deepClone2(data), data, deepClone2(data) === data);
+    // console.log(deepClone2(data), data, deepClone2(data) === data);
+    function getRandomStr(len) {
+      var str = ""
+      for (var i = 0; i < len; i++) {
+        // substring存在的意义是去除小数点
+        str += Math.random().toString(36).substring(2)
+        console.log(str)
+      }
+      return str.substring(0, len)
+    }
+    // console.log(getRandomStr(1));
+    // 节流
+    function throttle4(fn, delay = 200) {
+      let timer = null;
+      return function (...args) {
+        let _this = this
+        if (!timer) {
+          timer = setTimeout(() => {
+            fn.apply(_this, args)
+            timer = null
+          }, delay)
+        }
+      }
+    }
+    // document.body.onmousemove = throttle4(count, 1000);
+    // 防抖
+    function debounce4(fn, delay, now = true) {
+      return () => {
+        let timer = null;
+        let _this = this;
+        if (timer) clearTimeout(timer)
+        if (now) {
+          let callNow = !timer
+          timer = setTimeout(() => { timer = null }, delay)
+          if (callNow) {
+            fn.apply(_this, args)
+           }
+        } else {
+          timer = setTimeout(() => {  
+            fn.apply(_this. args)
+           }, delay)
+        }
+      }
+    }
+    document.body.onmousemove = debounce4(count, 1000);
   </script>
 </body>
 
