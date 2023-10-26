@@ -319,7 +319,7 @@
       };
     }
 
-    // content.onmousemove = debounce(count, 1000, true);
+    // content.onmousemove = debounce(count, 1000, true);··
     // content.onmousemove = throttle1(count, 1000);
     function promiseAll(promises) {
       return new Promise(function (resolve, reject) {
@@ -950,8 +950,61 @@
       }
       return targetObj
     }
-    console.log(deepClone3(data), data);
+    // console.log(deepClone3(data), data);
+    // 有效括号
+    function isValid1(str) {
+      if (!str.length) return -1
+      // 暴力法
+      const reg = /\(\)|{}|\[\]/g
+      while (str.match(reg)) {
+        str = str.replace(reg, '')
+        return str === ''
+      }
+    }
+    // console.log(isValid('[]'), 'isValid');
+    // 进制转化10进制转7进制
     // 实现一个简易的promise
+    function convertToBase72(num) {
+      // if (num === 0) return '0'
+      // let flag = num < 0;
+      // let n = ''
+      // //  直接取绝对值
+      // n = Math.abs(num)
+      // while (num) {
+      //   n = num % 7 - num
+      //   num = Math.floor(num / 7)
+      // }
+      if (num === 0) return '0';
+      let ans = '';
+      let flag = num < 0;
+      num = Math.abs(num);
+      while (num) {
+        ans = num % 7 + ans;
+        num = Math.floor(num / 7);
+      }
+      return flag ? (ans = '-' + ans) : ans
+      // return flag && (n = '-' + n)
+    }
+    console.log(convertToBase72(10));
+    // 实现数组排序 去重
+    const arrFormat = {
+      //  newArr = arr
+      newArr: [],
+      quchong: (arr=this.newArr) => {
+        let obj = {}
+       this.newArr = arr.reduce((ar, item) => {
+          obj[item?.city] ? '' : obj[item?.city] = true && ar.push(item)
+          return ar
+        }, [])
+        return this;
+      },
+      paixu: (arr=this.newArr) => {
+        this.newArr = []
+        return this;
+      }
+    }
+    // console.log();
+    // console.log(arrFormat.paixu(arr1))
     // 实现一个简易的async await
   </script>
 </body>

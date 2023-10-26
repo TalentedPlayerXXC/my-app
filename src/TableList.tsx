@@ -85,7 +85,6 @@ function TableList({ name = "2" }): any {
         return <Tag color="blue">medium</Tag>;
       case "warn":
         return <Tag color="red">warn</Tag>;
-
       default:
         break;
     }

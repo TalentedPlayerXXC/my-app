@@ -95,6 +95,7 @@ const MenuList = forwardRef((props, ref) => {
     </div>
   );
 })
-class Demo extends React.Component { }
-console.log(MenuList.prototype, '函数组件',Demo.prototype, '类组件');
+// 判断类组件还是函数组件
+// class Demo extends React.Component { }
+// console.log(MenuList.prototype, '函数组件',Demo.prototype, '类组件');
 export default MenuList;

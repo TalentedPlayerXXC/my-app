@@ -23,7 +23,7 @@
       }
       console.log(obj);
     }
-    strNum("123aaxx");
+    // strNum("123aaxx");
     // 数组乱序
     function arrRandom(arr) {
       if (!Array.isArray(arr)) return -1;
@@ -199,9 +199,9 @@
       let res = {};
       urlObj.searchParams.forEach((v, k) => {
         res[k] = v;
-        console.log("==>", v, k);
+        // console.log("==>", v, k);
       });
-      console.log(res);
+      // console.log(res);
       return res;
     }
     let url = `https://www.antgroup.com?name=ant&from=alibaba&job=frontend&extraInfo=%7B%22a%22%3A%22b%22%2C%22c%22%3A%22d%22%7D`
@@ -356,15 +356,63 @@
           timer = setTimeout(() => { timer = null }, delay)
           if (callNow) {
             fn.apply(_this, args)
-           }
+          }
         } else {
-          timer = setTimeout(() => {  
-            fn.apply(_this. args)
-           }, delay)
+          timer = setTimeout(() => {
+            fn.apply(_this.args)
+          }, delay)
         }
       }
     }
-    document.body.onmousemove = debounce4(count, 1000);
+    // document.body.onmousemove = debounce4(count, 1000);
+    // 进制转换
+    function convertToBase7(num) {
+      if (num === 0) return '0'
+      num = Math.abs(num)
+      let flag = num < 0
+      let n = '';
+      while (num) {
+        n = num % 7 + n
+        num = Math.floor(num / 7)
+      }
+      return flag ? '-' + n : n
+    }
+    console.log(convertToBase7(100)); // 7 => 10   100 => 202   2017=> 5611
+    // 节流
+    function throttle5(fn, delay = 200) {
+      let timer = null;
+      return function (...args) {
+        let _this = this;
+        if (!timer) {
+          timer = setTimeout(() => {
+            fn.apply(_this, args)
+            timer = null
+          }, delay)
+        }
+      }
+    }
+    // document.body.onmousemove = throttle5(count, 1000);
+    // 防抖
+    function debounce5(fn, delay, now = true) {
+      let timer = null;
+      return function (...args) {
+        let _this = this;
+        if (timer) clearTimeout(timer);
+        if (now) {
+          let callNow = !timer;
+          timer = setTimeout(() => { timer = null }, delay)
+          if (callNow) {
+            fn.apply(_this, args)
+          }
+        } else {
+          timer = setTimeout(() => {
+            fn.apply(_this, args)
+          }, delay)
+        }
+      }
+
+    }
+    document.body.onmousemove = debounce5(count, 1000);
   </script>
 </body>
 
