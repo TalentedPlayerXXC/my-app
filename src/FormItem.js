@@ -1,6 +1,5 @@
 import { useState, useEffect, Children, cloneElement } from 'react'
-function FormItem({ name, onChange = null, value = "", children }) {
-    // console.log(name, 'props');
+function FormItem({ name, value = "", children }) {
     const [val, setVal] = useState(value || '')
     useEffect(() => {
         setVal(value)

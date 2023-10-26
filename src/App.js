@@ -52,10 +52,11 @@ function App() {
       <myContext.Provider value={{
         count, setCount
       }}>
-        {/* <MenuList ref={dom} setCount={setCount} />
-        <TableList /> */}
+        <MenuList ref={dom} setCount={setCount} />
+        <TableList />
       </myContext.Provider>
       {/* {console.log(dom)} */}
+      <Button onClick={() => console.log(dom.current.value)}>get iptVal</Button> 
     </div>
   );
 }

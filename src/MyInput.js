@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import { Input } from "antd"
 // 第一题
 function MyInput() {
     const [val, setVal] = useState('')

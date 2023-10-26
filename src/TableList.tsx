@@ -31,7 +31,7 @@ const formItemLayout = {
     sm: { span: 16 },
   },
 };
-function TableList({ name = "2" }): any {
+function TableList(): any {
   const [form] = Form.useForm();
   const [state, setState]: any = useState({
     isModalOpen: false,
@@ -203,12 +203,13 @@ function TableList({ name = "2" }): any {
       key: "action",
       render: (text: any, record: any) => (
         <>
-          <a
-            style={{ color: "#1677ff" }}
+          <span
+            style={{ color: "#1677ff", cursor: 'pointer' }}
             onClick={() => showModal("edit", record)}
+
           >
             编辑
-          </a>
+          </span>
           <Popconfirm
             title=""
             description="确认删除吗？"
@@ -217,7 +218,7 @@ function TableList({ name = "2" }): any {
             okText="是"
             cancelText="否"
           >
-            <a style={{ color: "#1677ff", marginLeft: "5px" }}>删除</a>
+            <span style={{ color: "#1677ff", cursor: 'pointer', marginLeft: "5px" }}>删除</span>
           </Popconfirm>
         </>
       ),
