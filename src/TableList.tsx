@@ -325,7 +325,7 @@ function TableList(): any {
         </Button>
       </div>
       <Table
-        rowKey={"id"}
+        rowKey={'key'}
         style={{ marginTop: "5px" }}
         // 解决数据不刷新。。。。
         dataSource={
