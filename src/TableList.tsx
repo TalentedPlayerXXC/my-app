@@ -86,7 +86,7 @@ function TableList(): any {
       case "warn":
         return <Tag color="red">warn</Tag>;
       default:
-        break;
+        return '--'
     }
   };
   const renderTagColor = (type: string) => {
@@ -213,7 +213,7 @@ function TableList(): any {
           <Popconfirm
             title=""
             description="确认删除吗？"
-            onConfirm={() => confirm(record?.id)}
+            onConfirm={() => this.confirm(record?.id)}
             // onCancel={cancel}
             okText="是"
             cancelText="否"
@@ -280,12 +280,6 @@ function TableList(): any {
 
   return (
     <div style={{ padding: 20 }}>
-      {/* <UseCountdown 
-      day = {0}
-      hour = {0}
-      minute = {0}
-      second = {10}
-      /> */}
       <div style={{ display: "flex" }}>
         <div>
           名称：{" "}
@@ -320,7 +314,8 @@ function TableList(): any {
         }}
       >
         <h3>应用列表</h3>
-        <Button onClick={() => showModal("create", {})} type="primary">
+        {/* <Button onClick={() => showModal("create", {})} type="primary"> */}
+        <Button onClick={() => { throw new Error('111') }} type="primary">
           新建
         </Button>
       </div>

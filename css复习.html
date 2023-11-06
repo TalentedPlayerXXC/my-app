@@ -108,6 +108,53 @@
     <div class="sanjiao">
         <div></div>
     </div>
+    <div id="lists">
+        <ul></ul>
+    </div>
+    <script>
+        // function jsonp(res) {
+        //     // console.log(res);
+        //     let script = document.createElement('script');
+        //     let url = res.url;
+        //     script.src = url;
+        //     script.type="text/javascript";  
+        //     // document.getElementsByTagName('head')[0].appendChild(script);
+        //     document.head.appendChild(script);
+        // }
+        // jsonp({
+        //     // url: 'http://nymph.rbq.life:3000/wf/robot/sortie',
+        //     url: 'http://127.0.0.1:3001?callback=callbackFun',
+        //     // data: { msg: 'val' },
+        //     callback: callbackFun
+        // });
+
+        // function callbackFun(res) {
+        //     console.log('msg', res);
+        // }
+
+
+        var JSONP = document.createElement("script");
+
+        JSONP.type = "text/javascript";
+
+        JSONP.src = `https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=1&cb=dosomething`;
+        document.body.appendChild(JSONP)
+        function dosomething(data) {
+            console.log(data, 'data');
+            // var oUl = document.querySelector('#lists ul')
+            // oUl.innerHTML = ''
+            // data.s.map(function (html) {
+            //     var oLi = document.createElement('li')
+            //     oLi.innerHTML = html
+            //     oLi.onclick = function () {
+            //         window.location.href = `http://www.baidu.com/s?wd=${html}`
+            //     }
+            //     oUl.appendChild(oLi)
+            // })
+        }
+
+
+    </script>
 </body>
 
 </html>

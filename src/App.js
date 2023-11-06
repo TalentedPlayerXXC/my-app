@@ -1,7 +1,9 @@
-import { useRef, useState } from "react";
+import React, { useRef, useState, Suspense } from "react";
 import { Button, Input } from 'antd'
 import MenuList from "./MenuList";
 import myContext from './redux/reducer'
+import Tabs from "./Tabs";
+import CatchError from "./CatchError";
 import "./App.css";
 // import Counter from "./Count";
 // import useCountdown from "./useCountdown";
@@ -12,7 +14,6 @@ import "./App.css";
 import TableList from './TableList.tsx'
 import { MyInput, MyInput1 } from './MyInput'
 import FormItem from "./FormItem";
-
 function App() {
   const [count, setCount] = useState(0)
   const [val, setVal] = useState('1')
@@ -23,28 +24,22 @@ function App() {
   //   // 调用子组件num加一
   // }
   return (
-    // <Provider store={store}>
-    //   <div>
-    //     {/* <input ref={dom} /> */}
-    //     {/* <Button onClick={() => console.log(dom.current.value)}>get iptVal</Button> */}
-    //     {/* <UseReducer />  */}
-    //     <MenuList />
-    //     {/* {console.log(dom)} */}
-    //   </div>
-    // </Provider>
-    // <div onClick={getRef}>
     <div>
-      <div>
-        第三题: <FormItem name='ceshi'>
-          <Input style={{ width: 200 }} />
-        </FormItem>
-      </div>
-      <div style={{ marginTop: 10 }}>
-        第一题 ：<MyInput />
-      </div>
-      <div style={{ marginTop: 10 }}>
-        第二题： <MyInput1 value={val} onChange={e => setVal(e)} />
-      </div>
+      <Tabs />
+      <Suspense fallback={<>Loading......</>}>
+        <div>
+          第三题:
+          <FormItem name='ceshi'>
+            <Input style={{ width: 200 }} />
+          </FormItem>
+        </div>
+        <div style={{ marginTop: 10 }}>
+          第一题 ：<MyInput />
+        </div>
+        <div style={{ marginTop: 10 }}>
+          第二题： <MyInput1 value={val} onChange={e => setVal(e)} />
+        </div>
+      </Suspense>
 
       {/* 父组件count: {count}
       <Button onClick={() => dom?.current?.setNum((s) => s + 1)}>子组件num + 1</Button> */}
@@ -53,10 +48,13 @@ function App() {
         count, setCount
       }}>
         <MenuList ref={dom} setCount={setCount} />
-        <TableList />
+        {/* 使用错误捕获组件包裹 */}
+        <CatchError>
+          <TableList />
+        </CatchError>
       </myContext.Provider>
       {/* {console.log(dom)} */}
-      <Button onClick={() => console.log(dom.current.value)}>get iptVal</Button> 
+      <Button onClick={() => console.log(dom.current.value)}>get iptVal</Button>
     </div>
   );
 }

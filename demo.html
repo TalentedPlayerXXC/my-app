@@ -986,23 +986,34 @@
       // return flag && (n = '-' + n)
     }
     console.log(convertToBase72(10));
-    // 实现数组排序 去重
-    const arrFormat = {
-      //  newArr = arr
-      newArr: [],
-      quchong: (arr=this.newArr) => {
-        let obj = {}
-       this.newArr = arr.reduce((ar, item) => {
-          obj[item?.city] ? '' : obj[item?.city] = true && ar.push(item)
-          return ar
-        }, [])
-        return this;
-      },
-      paixu: (arr=this.newArr) => {
-        this.newArr = []
-        return this;
+    // 实现数组反转
+    function newReverse(arr) {
+      if (!Array.isArray(arr) || arr.length <= 0) return -1
+      for (let i = 0, j = arr.length - 1; j > i; j--, i++) {
+        const item = arr[i]
+        arr[i] = arr[j]
+        arr[j] = item
+      }
+      console.log(arr);
+      return arr
+    }
+    // newReverse([2, 4, 7, 1, 3])
+    // 实现数组排序
+    function sort(arr) {
+      if (!Array.isArray(arr) || arrr.length <= 0) return -1
+      for (let i = 0; i < arr.length; i++) {
+
       }
     }
+    // 实现trim
+    function trim() {
+      const reg = /^s+| $s+/
+      let str = '  121 3 '
+
+      console.log(str);
+      console.log(str.replace(/^\s+|\s+$|[,.:]/gm, ''));
+    }
+    trim()
     // console.log();
     // console.log(arrFormat.paixu(arr1))
     // 实现一个简易的async await

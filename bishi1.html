@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>笔试1</title>
+</head>
+
+<body>
+    <script>
+        const treeNodes = [
+            {
+                id: 1,
+                name: '1',
+                children: [
+                    {
+                        id: 11,
+                        name: '11',
+                        children: [
+                            {
+                                id: 111,
+                                name: '111',
+                                children: []
+                            },
+                            {
+                                id: 112,
+                                name: '112'
+                            }
+                        ]
+                    },
+                    {
+                        id: 12,
+                        name: '12',
+                        children: []
+                    }
+                ],
+                users: []
+            },
+            {
+                id: 2,
+                name: '2',
+                children: [
+                    {
+                        id: 22,
+                        name: '22',
+                        children: []
+                    }
+                ]
+            }
+        ];
+        // 树形结构
+        function tree(arr) {
+            if (!arr || arr.length <= 0) return -1
+            for (let i = 0; i < arr.length; i++) {
+                const child = arr[i]
+                if (child && child.length > 0) {
+                    tree(child)
+                }
+            }
+            console.log('递归实现遍历树形结构');
+        }
+        // tree(treeNodes)
+        // 伪数组转化
+        // Array.prototype.slice.call()
+    </script>
+</body>
+
+</html>
