@@ -31,6 +31,12 @@ const formItemLayout = {
     sm: { span: 16 },
   },
 };
+const dataSources = Array.from({ length: 3000 }).map((_, i) => ({
+  key: i,
+  name: "胡彦斌",
+  tags: ["small", "medium"],
+  desc: `西湖区湖底公园${i}号`,
+}))
 function TableList(): any {
   const [form] = Form.useForm();
   const [state, setState]: any = useState({
@@ -40,20 +46,7 @@ function TableList(): any {
     searchName: "",
     searchDesc: "",
     isFilter: false,
-    dataSource: [
-      {
-        key: "1",
-        name: "胡彦斌",
-        tags: ["small", "medium"],
-        desc: "西湖区湖底公园1号",
-      },
-      {
-        key: "2",
-        name: "胡彦祖",
-        tags: ["small", "medium", "warn"],
-        desc: "西湖区湖底公园2号",
-      },
-    ],
+    dataSource: dataSources,
     filterDate: [],
   });
 
@@ -375,4 +368,4 @@ function TableList(): any {
   );
 }
 
-export default memo(TableList);
+export default TableList;

@@ -77,7 +77,6 @@ const MenuList = forwardRef((props, ref) => {
         overflowY: 'auto'
       }}
     >
-      {console.log(val, '跨组件通讯')}
       <div>
         这是祖先组件的num: {val?.count} <Button onClick={() => val?.setCount(s => s + 1)}>点击这里修改祖先组件的值</Button>
       </div>
