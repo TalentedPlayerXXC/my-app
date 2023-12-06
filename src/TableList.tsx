@@ -31,14 +31,15 @@ const formItemLayout = {
     sm: { span: 16 },
   },
 };
-const dataSources = Array.from({ length: 3000 }).map((_, i) => ({
+const dataSources = Array.from({ length: 30 }).map((_, i) => ({
   key: i,
   name: "胡彦斌",
   tags: ["small", "medium"],
   desc: `西湖区湖底公园${i}号`,
 }))
-function TableList(): any {
+function TableList(props): any {
   const [form] = Form.useForm();
+  
   const [state, setState]: any = useState({
     isModalOpen: false,
     title: "create",
@@ -315,6 +316,7 @@ function TableList(): any {
       <Table
         rowKey={'key'}
         style={{ marginTop: "5px" }}
+        pagination={false}
         // 解决数据不刷新。。。。
         dataSource={
           !state.isFilter ? [...state?.dataSource] : [...state.filterDate]

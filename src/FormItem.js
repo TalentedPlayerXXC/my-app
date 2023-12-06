@@ -10,14 +10,20 @@ function FormItem({ name, value = "", children }) {
     //     // <Input />
     //     // </FormItem> 
     //     function FormItem({name}) {}
+    // const renderChild = () => {
+    //     return Children.map(children, (child, i) => {
+    //         return cloneElement(child, {
+    //             name,
+    //             onChange: (e) => setVal(e.target.value)
+    //         })
+    //     }
+    //     )
+    // }
     const renderChild = () => {
-        return Children.map(children, (child, i) => {
-            return cloneElement(child, {
-                name,
-                onChange: (e) => setVal(e.target.value)
-            })
-        }
-        )
+        return cloneElement(children, {
+            name,
+            onChange: (e) => setVal(e.target.value)
+        })
     }
     return (
         <div>

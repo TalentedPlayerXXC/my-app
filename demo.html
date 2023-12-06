@@ -985,7 +985,7 @@
       return flag ? (ans = '-' + ans) : ans
       // return flag && (n = '-' + n)
     }
-    console.log(convertToBase72(10));
+    // console.log(convertToBase72(10));
     // 实现数组反转
     function newReverse(arr) {
       if (!Array.isArray(arr) || arr.length <= 0) return -1
@@ -1007,16 +1007,25 @@
     }
     // 实现trim
     function trim() {
-      const reg = /^s+| $s+/
+      // const reg = /^s+| $s+/
       let str = '  121 3 '
 
       console.log(str);
       console.log(str.replace(/^\s+|\s+$|[,.:]/gm, ''));
     }
-    trim()
+    // trim()
     // console.log();
     // console.log(arrFormat.paixu(arr1))
     // 实现一个简易的async await
+
+
+    // 实现一个trim
+    function trim1(str) {
+      const reg = /^\s+| \s+$/g
+      return str.replace(reg, '')
+    }
+    console.log(trim1(' 112 3 '));
+    console.log(' 1123 ');
   </script>
 </body>
 
