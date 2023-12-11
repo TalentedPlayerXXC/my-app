@@ -10,6 +10,7 @@ import "./App.css";
 import BishiTi from "./BishiTi/index.js";
 import BishiTi2 from "./BishiTI2/index.js";
 import BiShiTi3 from "./BishiTi3/index.js";
+import BiShiTi4 from "./BishiTi4/index.js";
 // import { getUrlParams } from "./util.js";
 // import Counter from "./Count";
 // import useCountdown from "./useCountdown";
@@ -52,6 +53,7 @@ function App(props) {
         <Link to="/bishi">BiShi</Link>
         <Link to="/bishi2">BiShi2</Link>
         <Link to="/bishi3">BiShi3</Link>
+        <Link to="/bishi4">BiShi4</Link>
       </div>
       <Suspense fallback={<p>Loading component...</p>}>
         <Routes>
@@ -59,6 +61,7 @@ function App(props) {
           <Route path="table-list" element={<TableList />} />
           <Route path="bishi" element={<BishiTi />} />
           <Route path="bishi3" element={<BiShiTi3 />} />
+          <Route path="bishi4" element={<BiShiTi4 />} />
         </Routes>
       </Suspense>
 
