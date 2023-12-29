@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bishi</title>
+</head>
+
+<body>
+    <script>
+        // 数组相关
+
+        // 操作方法
+        let arr = ['a', 'b', 'c', 'd', 'f', 'g',]
+        // 增
+        arr.push('aa', 'bb') // 尾部添加
+        arr.unshift('aaa') // 头部添加
+        arr.splice(1, 0, 'bbb')
+        console.log(arr, '增');
+        // 删除
+        arr.pop() // 尾部删除
+        arr.shift() // 头部删除
+        arr.splice(0, 1)
+        // slice() 方法返回一个新的数组对象，这一对象是一个由 start 和 end 决定的原数组的浅拷贝（包括 start，不包括 end），
+        // 其中 start 和 end 代表了数组元素的索引。原始数组不会被改变。
+        let newArr = arr.slice(1, 4)
+        console.log(arr, newArr, '删');
+        // 查
+
+        console.log(arr.indexOf('a'), '查-indexOf');
+        console.log(arr.find(item => item === 'a'), '查-find');
+        console.log(arr.findIndex(item => item === 'a'), '查-find');
+        console.log(arr.includes('a'), '查-find');
+        // 排序
+        console.log(arr, '排序');
+        console.log(arr.reverse(), '排序-reverse');
+        console.log(arr.sort((a, b) => a - b), '排序-sort');
+        // 转换
+        console.log(arr.join(), '转换-join');
+        // 迭代方法
+        // some()
+        // every()
+        // forEach()
+        // filter()
+        // map()
+
+        // 字符串常用方法
+        let str = 'hello world'
+        console.log(str, '字符串');
+        // 增
+        console.log(str + 'sss', '字符-加');
+        // 删
+        console.log(str.split(''), '字符-split'); // 转换为数组
+        console.log(str.slice(0, 1), '字符-slice'); // 转换为数组
+        console.log(str.toLowerCase(), 'str.toLowerCase()');
+        console.log(str.toUpperCase(), 'str.toUpperCase()');
+        // 去除空白
+        console.log(str.replace(/\s/g, '-'));
+        // 查
+        console.log(str.charAt(0), 'chat');
+        console.log(str.indexOf('h'), 'indexOf');
+        console.log(str.includes('h'), 'includes');
+    </script>
+</body>
+
+</html>
