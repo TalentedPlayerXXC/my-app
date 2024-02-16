@@ -7,7 +7,7 @@ function BishiTi() {
     return (
         <>
             <MyInput1 />
-            <MyInput2 value={val} onChange={e => setVal(e?.target?.value)}/>
+            <MyInput2 value={val} onChange={e => setVal(e?.target?.value)} />
             <MyFormItem name="ceshi">
                 <input />
             </MyFormItem>
