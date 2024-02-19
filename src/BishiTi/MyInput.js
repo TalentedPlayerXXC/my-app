@@ -1,4 +1,4 @@
-import { cloneElement, useEffect, useRef, useState } from "react";
+import { cloneElement, useState } from "react";
 // 1.实现一个组件<Input>组件, 里面有两个标签 div、input，当用户在input框里面输入任意值，div就展示任意值
 // exp: 用户输入 123， div中展示123
 

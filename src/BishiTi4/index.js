@@ -4,7 +4,7 @@ import { TimeoutComp, formattedDate, timeF } from "./util";
 import axios from "axios";
 function BiShiTi4() {
     const [state, setState] = useState(11543)
-    const [platform, _] = useState(window.navigator?.userAgent.toLowerCase()?.includes('windows') || false)
+    const [platform, ] = useState(window.navigator?.userAgent.toLowerCase()?.includes('windows') || false)
     useEffect(() => {
         axios.get('https://systemjs.1688.com/krump/schema/1352.json')
             .then(res => {

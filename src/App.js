@@ -1,16 +1,17 @@
-import React, { useRef, useState, Suspense, useEffect, lazy } from "react";
-import { Route, Link, Routes, useLocation, useSearchParams, useNavigate } from "react-router-dom";
+import React, {  Suspense, lazy } from "react";
+import { Route, Link, Routes, useSearchParams, useNavigate } from "react-router-dom";
 import { Button } from "antd";
 // import { getUrlParams } from './util.js'
 // import MenuList from "./MenuList";
-import myContext from './redux/reducer'
-import CatchError from "./CatchError";
+// import myContext from './redux/reducer'
+// import CatchError from "./CatchError";
 // import BiShi from "./BiShi.js";
 import "./App.css";
 import BishiTi from "./BishiTi/index.js";
-import BishiTi2 from "./BishiTI2/index.js";
+// import BishiTi2 from "./BishiTI2/index.js";
 import BiShiTi3 from "./BishiTi3/index.js";
 import BiShiTi4 from "./BishiTi4/index.js";
+import Lowcode from "./Lowcode/index.js";
 // import { getUrlParams } from "./util.js";
 // import Counter from "./Count";
 // import useCountdown from "./useCountdown";
@@ -22,7 +23,7 @@ import BiShiTi4 from "./BishiTi4/index.js";
 const TableList = lazy(() => import('./TableList.tsx'))
 const MenuList = lazy(() => import('./MenuList'))
 function App(props) {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams,] = useSearchParams();
   // const [time, setTime] = useState(new Date().getTime())
   // const dom = useRef(null)
   const navigate = useNavigate()
@@ -47,13 +48,14 @@ function App(props) {
       {/* {time} */}
       <Button onClick={changeUrl}>更改地址栏参数</Button>
       <Button onClick={getUrlParams}>获取参数</Button>
-      <div>
-        <Link to="/">Home</Link>
-        <Link to="/table-list">TableList</Link>
-        <Link to="/bishi">BiShi</Link>
-        <Link to="/bishi2">BiShi2</Link>
-        <Link to="/bishi3">BiShi3</Link>
-        <Link to="/bishi4">BiShi4</Link>
+      <div style={{ marginTop: 10 }}>
+        <Link style={{ marginLeft: 10 }} to="/">Home</Link>
+        <Link style={{ marginLeft: 10 }} to="/table-list">TableList</Link>
+        <Link style={{ marginLeft: 10 }} to="/bishi">BiShi</Link>
+        <Link style={{ marginLeft: 10 }} to="/bishi2">BiShi2</Link>
+        <Link style={{ marginLeft: 10 }} to="/bishi3">BiShi3</Link>
+        <Link style={{ marginLeft: 10 }} to="/bishi4">BiShi4</Link>
+        <Link style={{ marginLeft: 10 }} to="/lowcode">丐版低代码功能</Link>
       </div>
       <Suspense fallback={<p>Loading component...</p>}>
         <Routes>
@@ -62,6 +64,7 @@ function App(props) {
           <Route path="bishi" element={<BishiTi />} />
           <Route path="bishi3" element={<BiShiTi3 />} />
           <Route path="bishi4" element={<BiShiTi4 />} />
+          <Route path="lowcode" element={<Lowcode />} />
         </Routes>
       </Suspense>
 

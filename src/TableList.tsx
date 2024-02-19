@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Table,
@@ -8,7 +8,7 @@ import {
   Select,
   Tag,
   Popconfirm,
-  message,
+  // message,
 } from "antd";
 const options = [
   {
@@ -97,18 +97,18 @@ function TableList(props): any {
     }
   };
   // 数据删除
-  const confirm = (id: number) => {
-    const idx = state?.dataSource.findIndex((item: any) => item?.id === id);
-    let arr = state?.dataSource;
-    if (idx >= 0) {
-      arr.splice(idx, 1);
-      setState((s: any) => ({
-        ...s,
-        dataSource: arr,
-      }));
-      message.success("数据已删除");
-    }
-  };
+  // const confirm = (id: number) => {
+  //   const idx = state?.dataSource.findIndex((item: any) => item?.id === id);
+  //   let arr = state?.dataSource;
+  //   if (idx >= 0) {
+  //     arr.splice(idx, 1);
+  //     setState((s: any) => ({
+  //       ...s,
+  //       dataSource: arr,
+  //     }));
+  //     message.success("数据已删除");
+  //   }
+  // };
   // 处理数据
   const getTableData = (data: any) => {
     const idx = state?.dataSource.findIndex(
