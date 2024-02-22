@@ -132,7 +132,32 @@
             }
             console.log(n.join(","));//控制台输出
         }
-        randomArr()
+        // randomArr()
+        // 进制转换
+        function convertToBase7(num, res = "") {
+
+            if (num < 7) {
+                return num.toString();
+            } else {
+                const remainder = num % 7;
+                const quotient = Math.floor(num / 7);
+                return convertToBase7(quotient) + remainder.toString();
+            }
+        }
+        function recursive(num, base) {
+            var str = "", digit = "0123456789abcdef";
+            if (num == 0) {
+                return "";
+            } else {
+                //js除运算不清除小数，用Math.floor清一下
+                str = recursive(Math.floor(num / base), base);
+                // console.log(num, 'num');
+                console.log(num % base, 'num % base');
+                return str + digit.charAt(num % base);
+            }
+        }
+        console.log(recursive(2017, 7)); // 11111100001
+        // console.log(convertToBase7(2017)); // 5611
     </script>
 </body>
 

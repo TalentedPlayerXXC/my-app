@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一些八股文的延伸1.0</title>
+</head>
+
+<body>
+    <script>
+        // 1. location对象的拓展
+        // 1.1 地址栏参数提取为数组对象
+        let obj = {}
+        // 传统方式
+        if (location.search) {
+            location.search.split('?')[1].split('&').forEach(item => {
+                obj[`${item.split('=')[0]}`] = item.split('=')[1]
+            })
+            // console.log(obj, 'old');
+        }
+        // 使用 new URL()方式 更简化！
+        const urlObj = new URL(location.href)
+        urlObj?.searchParams.forEach((v, k) => {
+            obj[k] = v
+        })
+        // console.log(obj, 'new');
+        // 2. instanceOf封装
+        function myInstanceOf(left, right) {
+            // 主要是用来判断复杂数据类型
+            // 1.首先需要判断传进来的参数是不是基本数据类型或者null
+            if (typeof left !== 'object' || typeof left === 'null') return false
+            let proto = Object.getPrototypeOf(left)
+            while (true) {
+                // 如果为null那么说明左右两边没有关系返回false
+                if (proto === null) return false;
+                // 如果左边跟右边的原型相同说明是一个类型返回true
+                if (proto === right.prototype) return true;
+                // 在在左边不为null的情况下 继续顺着原型向上找 直到为bull
+                proto = Object.getPrototypeOf(proto)
+            }
+        }
+        // console.log(myInstanceOf([], Array));
+        // 3. 复杂数据类型赋值问题： 深拷贝方案
+    </script>
+</body>
+
+</html>
