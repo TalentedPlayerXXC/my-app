@@ -9,87 +9,64 @@
 
 <body>
   <div style="width: 100%; height: 300px; background: #000">qw</div>
-  <script>
-    // 判断字符串中字符出现次数
-    function strNum(str) {
-      let obj = {};
-      for (let i = 0; i < str.length; i++) {
-        const element = str[i];
-        if (obj[element]) {
-          obj[element] += 1;
-        } else {
-          obj[element] = 1;
-        }
-      }
-      console.log(obj);
+
+  // 判断字符串中字符出现次数
+  function strNum(str) {
+  let obj = {};
+  for (let i = 0; i < str.length; i++) { const element=str[i]; if (obj[element]) { obj[element] +=1; } else {
+    obj[element]=1; } } console.log(obj); } // strNum("123aaxx"); // 数组乱序 function arrRandom(arr) { if
+    (!Array.isArray(arr)) return -1; let arrl=arr.length; let newArr=[]; for (let i=0; i < arrl; i++) { let
+    idx=Math.floor(Math.random() * arr.length); newArr.push(arr[idx]); arr.splice(idx, 1); } console.log(newArr); } //
+    arrRandom([1, 2, 3, 4, 5]); // 数组扁平化 function flatten(arr) { if (!Array.isArray(arr)) return -1; // 方式一 while
+    (arr.some((item)=> Array.isArray(item))) {
+    arr = [].concat(...arr);
     }
-    // strNum("123aaxx");
-    // 数组乱序
-    function arrRandom(arr) {
-      if (!Array.isArray(arr)) return -1;
-      let arrl = arr.length;
-      let newArr = [];
-      for (let i = 0; i < arrl; i++) {
-        let idx = Math.floor(Math.random() * arr.length);
-        newArr.push(arr[idx]);
-        arr.splice(idx, 1);
-      }
-      console.log(newArr);
-    }
-    //   arrRandom([1, 2, 3, 4, 5]);
-    // 数组扁平化
-    function flatten(arr) {
-      if (!Array.isArray(arr)) return -1;
-      // 方式一
-      while (arr.some((item) => Array.isArray(item))) {
-        arr = [].concat(...arr);
-      }
-      // 方式二
-      // let newArr = arr.flat(Infinity);
-      return arr;
+    // 方式二
+    // let newArr = arr.flat(Infinity);
+    return arr;
     }
     // console.log(flatten([1, [2, [3, [4, [5]]]]]));
     // 节流
     function throttle(fn, delay) {
-      let timer = null;
-      return function (...args) {
-        let _this = this;
-        if (!timer) {
-          timer = setTimeout(() => {
-            timer = null;
-            fn.apply(_this, args);
-          }, delay);
-        }
-      };
+    let timer = null;
+    return function (...args) {
+    let _this = this;
+    if (!timer) {
+    timer = setTimeout(() => {
+    timer = null;
+    fn.apply(_this, args);
+    }, delay);
+    }
+    };
     }
     // 防抖
     function debounce(fn, delay, now) {
-      return () => {
-        let timer = null;
-        return function (...args) {
-          let _this = this;
-          if (timer) clearTimeout(timer);
-          if (now) {
-            let callNow = !timer;
-            timer = setTimeout(() => {
-              timer = null;
-            }, delay);
-            if (callNow) {
-              fn.apply(_this, args);
-            }
-          } else {
-            timer = setTimeout(() => {
-              fn.apply(_this, args);
-            }, delay);
-          }
-        };
-      }
+    return () => {
+    let timer = null;
+    return function (...args) {
+    let _this = this;
+    if (timer) clearTimeout(timer);
+    if (now) {
+    let callNow = !timer;
+    timer = setTimeout(() => {
+    timer = null;
+    }, delay);
+    if (callNow) {
+    fn.apply(_this, args);
+    }
+    } else {
+    timer = setTimeout(() => {
+    fn.apply(_this, args);
+    }, delay);
+    }
+    };
+    }
     }
     function count() {
-      console.log(0);
+    console.log(0);
     }
     function myFunction() {
-      console.log("Debounced function executed");
+    console.log("Debounced function executed");
     }
     // document.body.onmousemove = throttle(count, 1000);
     let deb = debounce(myFunction, 1000, true)
@@ -97,323 +74,272 @@
     // document.body.onmousemove = deb();
     // 统计字符串出现最多的字母
     function strMany(str) {
-      if (!str) return -1;
-      let obj = {};
-      for (let i = 0; i < str.length; i++) {
-        let ele = str[i];
-        if (obj[ele]) {
-          obj[ele] += 1;
-        } else {
-          obj[ele] = 1;
-        }
+    if (!str) return -1;
+    let obj = {};
+    for (let i = 0; i < str.length; i++) { let ele=str[i]; if (obj[ele]) { obj[ele] +=1; } else { obj[ele]=1; } } let
+      max=0; let s="" ; for (const k in obj) { // console.log(k); if (obj[k]>= max) {
+      max = obj[k];
+      s = k;
       }
-      let max = 0;
-      let s = "";
-      for (const k in obj) {
-        // console.log(k);
-        if (obj[k] >= max) {
-          max = obj[k];
-          s = k;
-        }
       }
       console.log(s, max);
-    }
-    // strMany("afjghdfraaaasdenas");
-    // 统计只出现一次的字符
-    function oneStr(str) {
+      }
+      // strMany("afjghdfraaaasdenas");
+      // 统计只出现一次的字符
+      function oneStr(str) {
       if (!str) return -1;
       let arr = [];
-      for (let i = 0; i < str.length; i++) {
-        let s = str[i];
-        if (str.indexOf(s) === str.lastIndexOf(s)) {
-          arr.push(s);
-        }
-      }
-      console.log(arr);
-    }
-    // oneStr("afeajafjd");
-    const data = {
-      books: [
-        {
-          title: "《活着》",
-          anchor: "余华",
-          price: 28.8,
-        },
-        {
-          title: "《三国演义》",
-          anchor: "罗贯中",
-          price: 48.8,
-          tag: ["战争", "历史"],
-        },
-      ],
-      detail: {
-        create_time: 137161901,
-      },
-      fn: () => { },
-      nul: null,
-      und: undefined,
-    };
-    // 实现深拷贝
-    function deepClone(data) {
-      const targetObj = data?.constructor === Array ? [] : {};
-      console.log(data, 'data');
-      for (let keys in data) {
+      for (let i = 0; i < str.length; i++) { let s=str[i]; if (str.indexOf(s)===str.lastIndexOf(s)) { arr.push(s); } }
+        console.log(arr); } // oneStr("afeajafjd"); const data={ books: [ { title: "《活着》" , anchor: "余华" , price: 28.8,
+        }, { title: "《三国演义》" , anchor: "罗贯中" , price: 48.8, tag: ["战争", "历史" ], }, ], detail: { create_time: 137161901,
+        }, fn: ()=> { },
+        nul: null,
+        und: undefined,
+        };
+        // 实现深拷贝
+        function deepClone(data) {
+        const targetObj = data?.constructor === Array ? [] : {};
+        console.log(data, 'data');
+        for (let keys in data) {
         if (data.hasOwnProperty(keys)) {
-          if (typeof data[keys] === "object") {
-            targetObj[keys] = deepClone(data[keys]);
-          } else {
-            targetObj[keys] = data[keys];
-          }
+        if (typeof data[keys] === "object") {
+        targetObj[keys] = deepClone(data[keys]);
+        } else {
+        targetObj[keys] = data[keys];
         }
-      }
-      return targetObj;
-    }
-    // console.log(deepClone(data) === data, deepClone(data), data);
+        }
+        }
+        return targetObj;
+        }
+        // console.log(deepClone(data) === data, deepClone(data), data);
 
-    // 实现instanceOf
-    function myInstanceOf(left, right) {
-      let _proto = Object.getPrototypeOf(left);
-      let _prototype = right.prototype;
-      while (true) {
+        // 实现instanceOf
+        function myInstanceOf(left, right) {
+        let _proto = Object.getPrototypeOf(left);
+        let _prototype = right.prototype;
+        while (true) {
         if (!_proto) {
-          return false;
+        return false;
         }
         if (_proto === _prototype) {
-          return true;
+        return true;
         }
         // 找不到原型就在向上找
         _proto = Object.getPrototypeOf(_proto);
-      }
-    }
-    // console.log(myInstanceOf(2, Function)); // false
-    // console.log(myInstanceOf(2, Number)); // true
-    // url参数拆分
-    function urlParams(url) {
-      let urlObj;
-      // 兜底
-      try {
+        }
+        }
+        // console.log(myInstanceOf(2, Function)); // false
+        // console.log(myInstanceOf(2, Number)); // true
+        // url参数拆分
+        function urlParams(url) {
+        let urlObj;
+        // 兜底
+        try {
         urlObj = new URL(url);
-      } catch (e) {
+        } catch (e) {
         throw e;
-      }
-      let res = {};
-      urlObj.searchParams.forEach((v, k) => {
+        }
+        let res = {};
+        urlObj.searchParams.forEach((v, k) => {
         res[k] = v;
         // console.log("==>", v, k);
-      });
-      // console.log(res);
-      return res;
-    }
-    let url = `https://www.antgroup.com?name=ant&from=alibaba&job=frontend&extraInfo=%7B%22a%22%3A%22b%22%2C%22c%22%3A%22d%22%7D`
-    urlParams(
-      url
-    );
-    // 延迟执行
-    function delay1(time) {
-      return new Promise((resolve, reject) => {
-        setTimeout(resolve, time);
-      });
-    }
-
-    // (async () => {
-    //   await delay1(2000);
-    //   console.log("两秒");
-    // })();
-    // console.log(curry(1)(2)(3));
-    // const add = (() => {
-    //   let length = 0;
-    //   let res = 0;
-    //   const fo = (...args) => {
-    //     // console.log(args);
-    //     length += args.length
-    //     args.forEach(num => res +=num)
-    //     // args.forEach(num => console.log(num))
-    //     if(length === 3) {
-    //       return res
-    //       // console.log(res);
-    //     } else {
-    //       return fo
-    //     }
-    //   }
-    //   return fo
-    // })()
-    // // add(2,3,4)
-    // console.log(add(2,3,4));
-    // const add = (() => {
-    //   let length = 0;
-    //   let res = 0;
-
-    // })()
-    function sum(a, b, c) {
-      return a + b + c;
-    }
-    function curry(func) {
-      return function curried(...args) {
-        if (args.length >= func.length) {
-          return func.apply(this, args);
-        } else {
-          return function (...args2) {
-            return curried.apply(this, args.concat(args2));
-          }
+        });
+        // console.log(res);
+        return res;
         }
-      };
+        let url =
+        `https://www.antgroup.com?name=ant&from=alibaba&job=frontend&extraInfo=%7B%22a%22%3A%22b%22%2C%22c%22%3A%22d%22%7D`
+        urlParams(
+        url
+        );
+        // 延迟执行
+        function delay1(time) {
+        return new Promise((resolve, reject) => {
+        setTimeout(resolve, time);
+        });
+        }
 
-    }
-    // let curriedSum = curry(sum);
-    // console.log(curriedSum(1)(2)(3));
-    // 实现instanceOf
-    function myInstanceOf2(left, right) {
-      const L = Object.getPrototypeOf(left); // left的隐式原型 getPrototypeOf返回指定对象的原型
-      const R = right.prototype; // right的显示原型
-      while (true) {
+        // (async () => {
+        // await delay1(2000);
+        // console.log("两秒");
+        // })();
+        // console.log(curry(1)(2)(3));
+        // const add = (() => {
+        // let length = 0;
+        // let res = 0;
+        // const fo = (...args) => {
+        // // console.log(args);
+        // length += args.length
+        // args.forEach(num => res +=num)
+        // // args.forEach(num => console.log(num))
+        // if(length === 3) {
+        // return res
+        // // console.log(res);
+        // } else {
+        // return fo
+        // }
+        // }
+        // return fo
+        // })()
+        // // add(2,3,4)
+        // console.log(add(2,3,4));
+        // const add = (() => {
+        // let length = 0;
+        // let res = 0;
+
+        // })()
+        function sum(a, b, c) {
+        return a + b + c;
+        }
+        function curry(func) {
+        return function curried(...args) {
+        if (args.length >= func.length) {
+        return func.apply(this, args);
+        } else {
+        return function (...args2) {
+        return curried.apply(this, args.concat(args2));
+        }
+        }
+        };
+
+        }
+        // let curriedSum = curry(sum);
+        // console.log(curriedSum(1)(2)(3));
+        // 实现instanceOf
+        function myInstanceOf2(left, right) {
+        const L = Object.getPrototypeOf(left); // left的隐式原型 getPrototypeOf返回指定对象的原型
+        const R = right.prototype; // right的显示原型
+        while (true) {
         if (!L) return false
         if (L === R) {
-          return true
+        return true
         }
         L = Object.getPrototypeOf(L) //如果没有找到就继续向上查找
-      }
-    }
+        }
+        }
 
-    // 节流
-    function throttle3(fn, delay) {
-      let timer = null;
-      return function (...args) {
-        let _this = this;
-        if (!timer) {
-          timer = setTimeout(() => {
-            fn.apply(_this, args)
-            timer = null
-          }, delay)
-        }
-      }
-    }
-    //  document.body.onmousemove = throttle3(count, 1000);
-    // 防抖
-    function debounce3(fn, delay, now = true) {
-      let timer = null;
-      return function (...args) {
-        let _this = this;
-        if (timer) clearTimeout(timer)
-        if (now) {
-          let callNow = !timer;
-          timer = setTimeout(() => { timer = null }, delay)
-          if (callNow) {
-            fn.apply(_this, args)
-          }
-        }
-      }
-    }
-    // document.body.onmousemove = debounce3(count, 1000);
-    // 深拷贝
-    function deepClone2(arr) {
-      const targetObj = arr?.constrontor ? Array : {}
-      for (const key in arr) {
-        if (Object.hasOwnProperty.call(arr, key)) {
-          const element = arr[key];
-          if (element && typeof element === 'object') {
-            targetObj[key] = deepClone2(element)
-          } else {
-            targetObj[key] = element
-          }
-        }
-      }
-      return targetObj
-
-    }
-    // console.log(deepClone2(data), data, deepClone2(data) === data);
-    function getRandomStr(len) {
-      var str = ""
-      for (var i = 0; i < len; i++) {
-        // substring存在的意义是去除小数点
-        str += Math.random().toString(36).substring(2)
-        console.log(str)
-      }
-      return str.substring(0, len)
-    }
-    // console.log(getRandomStr(1));
-    // 节流
-    function throttle4(fn, delay = 200) {
-      let timer = null;
-      return function (...args) {
-        let _this = this
-        if (!timer) {
-          timer = setTimeout(() => {
-            fn.apply(_this, args)
-            timer = null
-          }, delay)
-        }
-      }
-    }
-    // document.body.onmousemove = throttle4(count, 1000);
-    // 防抖
-    function debounce4(fn, delay, now = true) {
-      return () => {
+        // 节流
+        function throttle3(fn, delay) {
         let timer = null;
+        return function (...args) {
+        let _this = this;
+        if (!timer) {
+        timer = setTimeout(() => {
+        fn.apply(_this, args)
+        timer = null
+        }, delay)
+        }
+        }
+        }
+        // document.body.onmousemove = throttle3(count, 1000);
+        // 防抖
+        function debounce3(fn, delay, now = true) {
+        let timer = null;
+        return function (...args) {
         let _this = this;
         if (timer) clearTimeout(timer)
         if (now) {
+        let callNow = !timer;
+        timer = setTimeout(() => { timer = null }, delay)
+        if (callNow) {
+        fn.apply(_this, args)
+        }
+        }
+        }
+        }
+        // document.body.onmousemove = debounce3(count, 1000);
+        // 深拷贝
+        function deepClone2(arr) {
+        const targetObj = arr?.constrontor ? Array : {}
+        for (const key in arr) {
+        if (Object.hasOwnProperty.call(arr, key)) {
+        const element = arr[key];
+        if (element && typeof element === 'object') {
+        targetObj[key] = deepClone2(element)
+        } else {
+        targetObj[key] = element
+        }
+        }
+        }
+        return targetObj
+
+        }
+        // console.log(deepClone2(data), data, deepClone2(data) === data);
+        function getRandomStr(len) {
+        var str = ""
+        for (var i = 0; i < len; i++) { // substring存在的意义是去除小数点 str +=Math.random().toString(36).substring(2)
+          console.log(str) } return str.substring(0, len) } // console.log(getRandomStr(1)); // 节流 function
+          throttle4(fn, delay=200) { let timer=null; return function (...args) { let _this=this if (!timer) {
+          timer=setTimeout(()=> {
+          fn.apply(_this, args)
+          timer = null
+          }, delay)
+          }
+          }
+          }
+          // document.body.onmousemove = throttle4(count, 1000);
+          // 防抖
+          function debounce4(fn, delay, now = true) {
+          return () => {
+          let timer = null;
+          let _this = this;
+          if (timer) clearTimeout(timer)
+          if (now) {
           let callNow = !timer
           timer = setTimeout(() => { timer = null }, delay)
           if (callNow) {
-            fn.apply(_this, args)
+          fn.apply(_this, args)
           }
-        } else {
+          } else {
           timer = setTimeout(() => {
-            fn.apply(_this.args)
+          fn.apply(_this.args)
           }, delay)
-        }
-      }
-    }
-    // document.body.onmousemove = debounce4(count, 1000);
-    // 进制转换
-    function convertToBase7(num) {
-      if (num === 0) return '0'
-      num = Math.abs(num)
-      let flag = num < 0
-      let n = '';
-      while (num) {
-        n = num % 7 + n
-        num = Math.floor(num / 7)
-      }
-      return flag ? '-' + n : n
-    }
-    console.log(convertToBase7(100)); // 7 => 10   100 => 202   2017=> 5611
-    // 节流
-    function throttle5(fn, delay = 200) {
-      let timer = null;
-      return function (...args) {
-        let _this = this;
-        if (!timer) {
-          timer = setTimeout(() => {
+          }
+          }
+          }
+          // document.body.onmousemove = debounce4(count, 1000);
+          // 进制转换
+          function convertToBase7(num) {
+          if (num === 0) return '0'
+          num = Math.abs(num)
+          let flag = num < 0 let n='' ; while (num) { n=num % 7 + n num=Math.floor(num / 7) } return flag ? '-' + n : n
+            } console.log(convertToBase7(100)); // 7=> 10 100 => 202 2017=> 5611
+            // 节流
+            function throttle5(fn, delay = 200) {
+            let timer = null;
+            return function (...args) {
+            let _this = this;
+            if (!timer) {
+            timer = setTimeout(() => {
             fn.apply(_this, args)
             timer = null
-          }, delay)
-        }
-      }
-    }
-    // document.body.onmousemove = throttle5(count, 1000);
-    // 防抖
-    function debounce5(fn, delay, now = true) {
-      let timer = null;
-      return function (...args) {
-        let _this = this;
-        if (timer) clearTimeout(timer);
-        if (now) {
-          let callNow = !timer;
-          timer = setTimeout(() => { timer = null }, delay)
-          if (callNow) {
+            }, delay)
+            }
+            }
+            }
+            // document.body.onmousemove = throttle5(count, 1000);
+            // 防抖
+            function debounce5(fn, delay, now = true) {
+            let timer = null;
+            return function (...args) {
+            let _this = this;
+            if (timer) clearTimeout(timer);
+            if (now) {
+            let callNow = !timer;
+            timer = setTimeout(() => { timer = null }, delay)
+            if (callNow) {
             fn.apply(_this, args)
-          }
-        } else {
-          timer = setTimeout(() => {
+            }
+            } else {
+            timer = setTimeout(() => {
             fn.apply(_this, args)
-          }, delay)
-        }
-      }
+            }, delay)
+            }
+            }
 
-    }
-    document.body.onmousemove = debounce5(count, 1000);
-  </script>
+            }
+            document.body.onmousemove = debounce5(count, 1000);
+            </script>
 </body>
 
 </html>

@@ -1,4 +1,4 @@
-import React, {  Suspense, lazy } from "react";
+import React, { Suspense, lazy, useState, /*useMemo,*/useRef } from "react";
 import { Route, Link, Routes, useSearchParams, useNavigate } from "react-router-dom";
 import { Button } from "antd";
 // import { getUrlParams } from './util.js'
@@ -11,6 +11,7 @@ import BishiTi from "./BishiTi/index.js";
 // import BishiTi2 from "./BishiTI2/index.js";
 import BiShiTi3 from "./BishiTi3/index.js";
 import BiShiTi4 from "./BishiTi4/index.js";
+import BiShiTi5 from "./BiShiTi5/index.js";
 import Lowcode from "./Lowcode/index.js";
 // import { getUrlParams } from "./util.js";
 // import Counter from "./Count";
@@ -24,6 +25,7 @@ const TableList = lazy(() => import('./TableList.tsx'))
 const MenuList = lazy(() => import('./MenuList'))
 function App(props) {
   const [searchParams,] = useSearchParams();
+  const myInput = useRef(null)
   // const [time, setTime] = useState(new Date().getTime())
   // const dom = useRef(null)
   const navigate = useNavigate()
@@ -43,8 +45,59 @@ function App(props) {
   const getUrlParams = () => {
     console.log(searchParams.toString());
   }
+  const [arr, setArr] = useState([
+    { id: 1, name: 'aaa' },
+    { id: 2, name: 'bbb' },
+    { id: 3, name: 'ccc' },
+    { id: 4, name: 'ddd' },
+  ])
+  const del = (id) => {
+    console.log(id);
+    let newArr = arr
+    newArr.splice(id, 1)
+    setArr([...newArr])
+  }
+
+  //  如果在memo中写个数字会怎么样 如果不写函数包裹会报错，如果有的话 就会返回这个数字
+  // const memo1 = useMemo(() => 1, [])
+  // {console.log(memo1, 'memo1')}
+  const [state, setState] = useState({
+    title: '',
+    type: '',
+    custom: [{
+      repTit: '',
+      compArr: [ //存放
+        {
+          comType: 'input',
+          compArr: [''] // 存放下拉 单选的数据
+        }
+      ]
+    }]
+  })
+
+  const focusTextInput = () => {
+    // 使用 current 来访问 DOM 节点，并修改 input 的值
+    console.log(myInput.current.value);
+    setState(s => ({
+      ...s,
+      a: 888
+    }))
+  };
+
+  // console.log(state, 'state');
+
+
   return (
     <div>
+      <input ref={myInput} />
+      <button onClick={focusTextInput}>Set Input Value</button>
+
+
+      {arr.map((item, key) => (
+        <div key={item?.id}>
+          {item?.name} <span onClick={() => del(key)}>删除</span>
+        </div>
+      ))}
       {/* {time} */}
       <Button onClick={changeUrl}>更改地址栏参数</Button>
       <Button onClick={getUrlParams}>获取参数</Button>
@@ -55,6 +108,7 @@ function App(props) {
         <Link style={{ marginLeft: 10 }} to="/bishi2">BiShi2</Link>
         <Link style={{ marginLeft: 10 }} to="/bishi3">BiShi3</Link>
         <Link style={{ marginLeft: 10 }} to="/bishi4">BiShi4</Link>
+        <Link style={{ marginLeft: 10 }} to="/bishi5">BiShi5</Link>
         <Link style={{ marginLeft: 10 }} to="/lowcode">丐版低代码功能</Link>
       </div>
       <Suspense fallback={<p>Loading component...</p>}>
@@ -64,6 +118,7 @@ function App(props) {
           <Route path="bishi" element={<BishiTi />} />
           <Route path="bishi3" element={<BiShiTi3 />} />
           <Route path="bishi4" element={<BiShiTi4 />} />
+          <Route path="bishi5" element={<BiShiTi5 />} />
           <Route path="lowcode" element={<Lowcode />} />
         </Routes>
       </Suspense>

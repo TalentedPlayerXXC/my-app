@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>设计模式</title>
+</head>
+
+<body>
+    <script>
+
+        class demo {
+            // let b = 1,
+            constructor() {
+                this.b = 'sss'
+            }
+            static a = '123'
+        }
+        // console.log(new demo(), demo.a);
+        // 1. 单例模式
+        class danliModel {
+            // 定义一个私有变量用来存储实例
+            static instance;
+            constructor() {
+                this.state = {
+                    a: '222'
+                }
+                if (!danliModel.instance) {
+                    danliModel.instance = this;
+                }
+                return danliModel.instance
+            }
+            getter(val) {
+                console.log(this.state[val], 'ss');
+
+            }
+            setter(val) {
+                console.log(val, 'value');
+
+            }
+        }
+        const a = new danliModel()
+        const b = new danliModel()
+        // console.log(a, b, a === b); // 此刻 a是等于b的 说明指向同一个内存地址 单例模式成立
+        // a.setter({ a: 'aaaa' })
+        // a.getter('a')
+        // console.log(a);
+
+
+        // 2.工厂模式
+        class Factory{
+            constructor(val) {
+                this.a = val
+            }
+            // let a = val || '1'
+            // return a
+        }
+        const f1 = new Factory('sss')
+        const f2 = new Factory('zzz')
+        // console.log(f1,f2, f1=== f2); // 与单例模式相反 工厂模式是创建多个实例 每个实例相互独立
+
+    </script>
+</body>
+
+</html>

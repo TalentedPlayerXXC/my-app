@@ -8,6 +8,7 @@
 </head>
 
 <body>
+    <del>这是删除标签del</del>
     <script>
         // 1. location对象的拓展
         // 1.1 地址栏参数提取为数组对象
@@ -42,6 +43,117 @@
         }
         // console.log(myInstanceOf([], Array));
         // 3. 复杂数据类型赋值问题： 深拷贝方案
+        const data = {
+            books: [
+                {
+                    title: "《活着》",
+                    anchor: "余华",
+                    price: 28.8,
+                },
+                {
+                    title: "《三国演义》",
+                    anchor: "罗贯中",
+                    price: 48.8,
+                    tag: ["战争", "历史"],
+                },
+            ],
+            detail: {
+                create_time: 137161901,
+            },
+            nul: null,
+            fn: () => { },
+            und: undefined,
+        };
+        //  3.1 最简单的方案 JSON.parse(JSON.stringfy()),这种方式无法处理方法跟undefined
+        // console.log(JSON.parse(JSON.stringify(data)));
+        // console.log(data,'data');
+        // 3.2 稳妥方案
+        function deepClone(obj) {
+            if (obj === null || typeof obj !== 'object') {
+                // 如果说是基本数据类型或者为null就没必要往下走了直接返回
+                return obj
+            }
+            let newObj = Array.isArray(obj) ? [] : {}
+            for (const key in obj) {
+                if (obj.hasOwnProperty(key)) {
+                    newObj[key] = deepClone(obj[key])
+                }
+            }
+            return newObj
+        }
+        // console.log(data, deepClone(data), data === deepClone(data)); // 数据一致但是结果却是false符合预期
+
+
+        // 构造函数
+        class Redux {
+            constructor() {
+                // 直接在后续的new过程中return第一次实例
+                if (Redux.instance) {
+                    console.log(Redux.instance, 'Redux.instance')
+                    return Redux.instance
+                }
+                this.state = {};
+                this.num = 1
+                Redux.instance = this;
+            }
+            // useSelector()
+            getState(value) {
+                this.num = value
+                console.log(this.num, 'num')
+            }
+            // useDispatch()
+            updata(value) {
+                this.num = value
+                console.log(this.num)
+            }
+        }
+        // creatStore
+        // const Redux1 = new Redux()
+        // const Redux2 = new Redux()
+        // console.log(Redux1, Redux2, Redux1 === Redux2)
+        // Redux1.updata('msc')
+        // console.log(Redux2)
+
+
+        // 千分位实现
+        //     function format(num) {
+        //         var str = num + '';
+        //         return str.split("").reverse().reduce((prev, next, index) => {
+        //             return ((index % 3) ? next : (next + ',')) + prev;
+        //         })
+        //     }
+
+        // console.log(format(123456789));
+        function formatNumberWithCommas(number) {
+            // 将数字转为字符串
+            const numberString = number.toString();
+
+            // 分割整数部分和小数部分
+            const parts = numberString.split('.');
+            const integerPart = parts[0];
+            const decimalPart = parts.length > 1 ? '.' + parts[1] : '';
+
+            // 对整数部分添加逗号分隔符
+            const formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+            // 拼接整数部分和小数部分
+            const formattedNumber = formattedInteger + decimalPart;
+
+            return formattedNumber;
+        }
+        console.log(formatNumberWithCommas(1234567890));
+        const num = 1234567890
+        const res = new Intl.NumberFormat().format(num)
+        // console.log(res, 'res');
+        // 验证一下循环如何断掉
+        const arr = [1, 2, 3, 4]
+        arr.forEach(item => {
+            if (item !== 'asd') return false;
+            console.log(item);
+        })
+        console.log(arr.map(item => {
+            return null
+        }));
     </script>
 </body>
 

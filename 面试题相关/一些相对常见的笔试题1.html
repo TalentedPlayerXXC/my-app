@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一些相对常见的笔试题1</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    div {
+        box-sizing: border-box;
+        margin: 10px;
+    }
+</style>
+
+<body>
+    <div style="width: 400px; height: 400px; background-color: aqua;">
+
+    </div>
+    <script>
+        // 1.   数组扁平化
+        function flatten(arr) {
+            if (!Array.isArray(arr)) return -1
+            while (arr.some(item => Array.isArray(item))) {
+                arr = [].concat(...arr)
+            }
+            return arr
+        }
+        // console.log(flatten([1, [2, [3, [4, 5, [6, [7]]]]]])); [1,2,3,4,5,6,7]
+
+        // 2.实现深拷贝
+        function deepClone(obj) {
+            if (obj === null || typeof obj !== "object") { return obj }
+            const newObj = Array.isArray(obj) ? [] : {}
+            for (const key in obj) {
+                if (obj.hasOwnProperty(key)) {
+                    newObj[key] = deepClone(obj[key])
+                }
+            }
+            return newObj
+        }
+        const obj = { a: { b: 1 }, bb: null, c: undefined, fn: () => { } }
+        // console.log(deepClone(obj) === obj);  // 内容一样 但是不相等输出符合预期
+
+        // 3.实现数组反转
+        // 方法一 双指针
+        function reverseArr1(arr) {
+            if (!Array.isArray(arr)) return -1
+            // let newArr = []
+            let left = 0
+            let right = arr.length - 1
+            // arr.forEach((item, key) => {
+            //     newArr[key] = arr[key + 1]
+            // })
+            while (left < right) {
+                let temp = arr[left]
+                arr[left] = arr[right]
+                arr[right] = temp
+                left++;
+                right--;
+            }
+
+            return arr
+        }
+        // 方法二 shift， unshift
+        function reverseArr2(arr) {
+            if (!Array.isArray(arr)) return -1
+            let newArr = []
+            while (arr.length > 0) {
+                newArr.unshift(arr.shift())
+            }
+            return newArr
+        }
+        // 方式三 万能的reduce
+        function reverseArr3(arr) {
+            if (!Array.isArray(arr)) return -1
+            return arr.reduce((acc, cur) => {
+
+                acc.unshift(cur)
+                return acc
+            }, [])
+        }
+
+        const arr = [1, 2, 3, 4, 5]
+        const arr2 = [4, 5, 6, 7, 8]
+        // console.log(reverseArr1(arr)); // [5,4,3,2,1]
+        // console.log(reverseArr2(arr)); // [5,4,3,2,1]
+        // console.log(reverseArr3(arr)); // [5,4,3,2,1]
+
+        // 4. 数组合并 （涉及去重）
+        function arrcont(arr1, arr2) {
+            if (!Array.isArray(arr1) || !Array.isArray(arr2)) return -1;
+            let obj = {} //用于做验证
+            const arr = [...arr1, ...arr2]
+
+            return arr.reduce((acc, cur) => {
+                // console.log(acc);
+                obj[cur?.id] ? '' : obj[cur?.id] = true && acc.push(cur)
+                // console.log(obj, 'obj');
+                return acc
+            }, [])
+
+        }
+        const arrobj1 = [{ id: 1, name: '1111' }, { id: 1, name: '1111' }, { id: 2, name: '2222' }]
+        const arrobj2 = [{ id: 2, name: '2222' }, { id: 3, name: '3333' }, { id: 4, name: '4444' }]
+        // console.log(arrcont(arrobj1, arrobj2));
+        // 5.字符串反转
+        function strReverse(str) {
+            // 判断是否是字符串类型
+            if (typeof str !== "string") return -1;
+            const strArr = str.split('')
+            // console.log(strArr);
+            const newArr = []
+            strArr.forEach((item) => {
+                newArr.unshift(item)
+            })
+            const newStr = newArr.join('')
+            console.log(newStr);
+        }
+        // strReverse('abcde') // 'edcba' 符合预期
+        // 6.复杂数据合并
+
+        /**
+         * 类型一
+         * 完成一个treeNode()方法，将多个完整的文件路径生成特性的属性结构。其中，最底层为叶子节点，以leaves作为保留字段。
+         * 如下所示： const pathArr = ['a/b/c', 'a/d','e/f];   const pathArr2 = ['a/b/c', 'a/b/d', 'e/f'];             
+         * treeNode(pathArr)结果为： {a:{b:{leaves: [c]},,leaves: [d]},e:{leaves: [f]}}. 
+         * treeNode(pathArr2)结果为： {a: {leaves: [c,d]}},e: {leaves: [f]}}.
+         */
+        const pathArr = ['a/b/c', 'a/d', 'e/f'];
+        // const pathArr2 = ['a/b/c'];
+        const pathArr2 = ['a/b/c', 'a/b/d', 'e/f'];
+        function treeNode(arr) {
+            const root = {}
+            arr.forEach(item => {
+                let current = root;
+                // console.log(root, 'root');
+                // 打散操作
+                const newArr = item.split('/')
+                // console.log(newArr, 'newArr');
+                for (let i = 0; i < newArr.length; i++) {
+                    let child = newArr[i]
+                    if (i === newArr.length - 1) {
+                        // 说明为最底层
+                        if (!current.leaves) {
+                            // 如果没有就按照数组形式生成并将第一个元素加进去
+                            current.leaves = [child]
+                        } else {
+                            // 有的话就正常push
+                            current.leaves.push(child)
+                        }
+                    } else {
+                        // 没有走到怎么办？持续的给元素递归增加层级
+                        if (!current[child]) current[child] = {}
+                        current = current[child]
+                    }
+                    console.log(root, 'root');
+                }
+                // console.log(current, 'current111');
+            })
+            console.log(root);
+            return root;
+        }
+        // treeNode(pathArr)
+        // treeNode(pathArr2)
+        /**
+         * 类型二
+         * 将{"a": {"n1": 1, "n2": 3 },  "b": {"n1": 2, "n2": 4},  "c": { "n1": 3,"n2": 5}}）
+        转换成{"n1": {"a": 1, "b": 2, "c": 3 }, "n2": { "a": 3, "b": 4, "c": 5}}
+         */
+        function dataFormat() {
+            const oldData = {
+                "a": { "n1": 1, "n2": 3 },
+                "b": { "n1": 2, "n2": 4 },
+                "c": { "n1": 3, "n2": 5 }
+            };
+            const newData = {}
+            // newData['n1']['a'] = oldData['a']['n1'] = 1 => n1: { a: 1 }
+            for (const key in oldData) { // a,b,b
+                for (const child in oldData[key]) { // n1, n2
+                    if (!newData[child]) newData[child] = {}
+                    newData[child][key] = oldData[key][child]
+                    /**
+                     * n1:{}
+                     * n1:{a: 1}
+                     * n2: {}
+                     * n2:{a:3}
+                     * {n1: {a:1}, n2: {a:3}}
+                     */
+                }
+            }
+            console.log(newData, 'newdata');
+            return newData
+
+        }
+        // dataFormat()
+        /**
+        * 类型一
+        * 完成一个treeNode()方法，将多个完整的文件路径生成特性的属性结构。其中，最底层为叶子节点，以leaves作为保留字段。
+        * 如下所示： const pathArr = ['a/b/c', 'a/d','e/f];   const pathArr2 = ['a/b/c', 'a/b/d', 'e/f'];             
+        * treeNode(pathArr)结果为： {a:{b:{leaves: [c]},,leaves: [d]},e:{leaves: [f]}}. 
+        * treeNode(pathArr2)结果为： {a: {leaves: [c,d]}},e: {leaves: [f]}}.
+        */
+        // function treeNode1(arr) {
+        //     const root = {}
+        //     arr.forEach(item => {
+        //         console.log(item, 'item1');
+        //     })
+
+        // }
+        // treeNode1(pathArr);
+        let arrr = ['a', 'b', 'c'];
+        let na = arrr.entries()
+        for (let val of na) {
+            console.log(val);
+        }
+        // arr.forEach()
+    </script>
+</body>
+
+</html>

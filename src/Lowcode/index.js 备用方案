@@ -1,0 +1,172 @@
+import { Input, Form, Checkbox, Button, Cascader, Space, Card } from 'antd'
+import { CloseOutlined, PlusOutlined } from '@ant-design/icons';
+const { Item } = Form
+function Lowcode() {
+    const [form] = Form.useForm()
+    const options = [
+        {
+            value: 'zhejiang',
+            label: 'Zhejiang',
+            children: [
+                {
+                    value: 'hangzhou',
+                    label: 'Hanzhou',
+                    children: [
+                        {
+                            value: 'xihu',
+                            label: 'West Lake',
+                        },
+                    ],
+                },
+            ],
+        },
+        {
+            value: 'jiangsu',
+            label: 'Jiangsu',
+            children: [
+                {
+                    value: 'nanjing',
+                    label: 'Nanjing',
+                    children: [
+                        {
+                            value: 'zhonghuamen',
+                            label: 'Zhong Hua Men',
+                        },
+                    ],
+                },
+            ],
+        },
+    ]
+    const plainOptions = [
+        { label: '服务端', value: 'server' }, { label: '前端', value: 'front' }];
+    const onFinish = (value) => {
+        console.log(value, 'value')
+    }
+    return (
+        <div style={{ padding: 10 }}>
+            <Form
+                onFinish={onFinish}
+                form={form}
+                labelCol={{
+                    span: 8,
+                }}
+                wrapperCol={{
+                    span: 16,
+                }}
+            >
+                <Item
+                    name="moduleName"
+                    label="模板名称"
+                    rules={[{
+                        required: true,
+                        message: '请输入模板名称!'
+                    }]}
+                >
+                    <Input style={{ width: 360 }} placeholder='请输入模板名称' />
+                </Item>
+                <Item
+                    name="modelType"
+                    label="应用类型"
+                    rules={[{
+                        required: true,
+                        message: '请勾选一个类型!'
+                    }]}
+                >
+                    <Checkbox.Group options={plainOptions} />
+                </Item>
+                <Item
+                    name="businessLine"
+                    label="业务线"
+                    rules={[
+                        {
+                            required: true,
+                            message: '请选择一个业务线！'
+                        }
+                    ]}
+                >
+                    <Cascader style={{ width: 360 }} options={options} changeOnSelect placeholder="请选择一个业务线" />
+                </Item>
+                <Item
+                    label="自定义模板"
+                    wrapperCol={{ span: 10 }}
+                    labelCol={{
+                        span: 7,
+                    }}>
+                    <Form.List name="items" initialValue={[{}]}>
+                        {(fields, { add, remove }) => (
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    rowGap: 16,
+                                    flexDirection: 'column',
+                                }}
+                            >
+                                {fields.map((field) => (
+                                    <Card
+                                        size="small"
+                                        title={`自定义问题录入报告 ${field.name + 1}`}
+                                        key={field.key}
+                                        extra={
+                                            <CloseOutlined
+                                                onClick={() => {
+                                                    remove(field.name);
+                                                }}
+                                            />
+                                        }
+                                    >
+                                        <Form.Item>
+                                            <Form.List name={[field.name, 'list']}>
+                                                {(subFields, subOpt) => (
+                                                    <div
+                                                        style={{
+                                                            // display: 'flex',
+                                                            // flexDirection: 'column',
+                                                            rowGap: 16,
+                                                        }}
+                                                    >
+                                                        {subFields.map((subField) => (
+                                                            <Space key={subField.key} style={{ display: 'flex', alignItems: 'center' }}>
+                                                                {console.log(subField, 'subField')}
+                                                                <Form.Item label="自定义问题录入报告名字" name={[subField.name, 'fikrst']}>
+                                                                    <Input placeholder="请输入报告名字" style={{ width: 360 }} />
+                                                                    {/* <CloseOutlined
+                                                                    onClick={() => {
+                                                                        subOpt.remove(subField.name);
+                                                                    }}
+                                                                /> */}
+                                                                </Form.Item>
+
+                                                            </Space>
+                                                        ))}
+                                                        <Button type="dashed" onClick={() => subOpt.add()} block>
+                                                            <PlusOutlined /> 添加问题项
+                                                        </Button>
+                                                    </div>
+                                                )}
+                                            </Form.List>
+                                        </Form.Item>
+                                    </Card>
+                                ))}
+
+                                <Button type="dashed" onClick={() => add()} block>
+                                    <PlusOutlined /> 添加报告
+                                </Button>
+                            </div>
+                        )}
+                    </Form.List>
+                </Item>
+
+                <Item wrapperCol={{ offset: 8, span: 16 }}>
+                    <Button type="primary" htmlType="submit">
+                        提交
+                    </Button>
+                    <Button style={{ marginLeft: 15 }}>
+                        预览
+                    </Button>
+                </Item>
+            </Form>
+        </div>
+    )
+}
+
+export default Lowcode
